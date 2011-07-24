@@ -16,16 +16,20 @@
     'get'               : function(selector, context) {
       if(typeof(selector) == 'string') {
         if(context) {
+          if(context.length == 0) {
+            return $();
+          }
           var _context = jCache.get(context);
           if(jCache.objectsCollection[context][selector] === undefined) {
-            for(var i in _context) {
               jCache.objectsCollection[context][selector] = jCache.query(selector, _context);
-            }
           }
           return jCache.objectsCollection[context][selector];
         } else {
           if(jCache.objectsCollection[selector] === undefined) {
             jCache.objectsCollection[selector] = {};
+            if(selector instanceof jQuery) {
+              return selector;
+            }
             if(jCache.objectsCollection[selector]['_object'] === undefined) {
               jCache.objectsCollection[selector]['_object'] = jCache.query(selector);
             }
@@ -33,7 +37,14 @@
           return jCache.objectsCollection[selector]['_object'];
         }
       }
-      return selector
+      if(context) {
+        return $(selector, context);
+      } else {
+        if(jCache.objectsCollection[selector] == undefined) {
+          jCache.objectsCollection[selector] = {};
+        }
+        return jCache.objectsCollection[selector]['_object'] = $(selector);
+      }
     },
     
     
