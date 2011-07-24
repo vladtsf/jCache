@@ -14,7 +14,6 @@
       
     });
     
-    module('jCache');
     test('Object Selectors', function() {
       
       expect(6);

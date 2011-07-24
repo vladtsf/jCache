@@ -7,24 +7,6 @@
     <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
     <script type="text/javascript" src="../jCache.jquery.js"></script>
     <script type="text/javascript" src="./tests.js"></script>
-    <script type="text/javascript">
-      jQuery(document).ready(function($) {
-        if(console) {
-          console.time('Average speed with cache');
-            for(var i = 0; i < 1000; i++) {
-              jCache('div');
-            }
-          console.timeEnd('Average speed with cache');
-
-          console.time('Average speed without cache');
-            for(var j = 0; j < 1000; j++) {
-              $('div');
-            }
-          console.timeEnd('Average speed without cache');
-        }
-      });
-
-    </script>
     <style type="text/css">
       .test-data {
         display: none;
@@ -39,12 +21,12 @@
     
     <div class="test-data">
       <div id="div">
-        <div></div>
-        <div></div>
+        <div>div</div>
+        <div>div</div>
       </div>
       <div id="div2">
-        <div></div>
-        <div></div>
+        <div>div</div>
+        <div>div</div>
       </div>
       <div class="div">div</div>
       <div class="div">div</div>
