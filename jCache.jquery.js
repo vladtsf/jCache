@@ -1,17 +1,14 @@
 (function($, undefined) {  
   //TODO: Solve problem with context!!!!
+  //TODO: Fix bug with element list in context
   var
     jCache = function(selector, context) {
       var 
         $this = $(this),
         se     = selector || false,
         co     = context  || false;
-      if(jCache.isObjectPassed($this)) {
-        jCache.set($this, $this);
-      } else {
-        if(selector) {
-          return jCache.get(se, co);
-        }
+      if(selector) {
+        return jCache.get(se, co);
       }
       return this;
     };
@@ -19,17 +16,30 @@
 
   $.extend(jCache, {
     'get'               : function(selector, context) {
-      if(selector in jCache.objectsCollection) {
-        return jCache.objectsCollection[selector];
+      if(typeof(selector) == 'string') {
+        if(context) {
+          var _context = jCache.get(context);
+          if(jCache.objectsCollection[context][selector] === undefined) {
+            for(var i in _context) {
+              //BUG WITH NodeList
+              jCache.objectsCollection[context][selector] = jCache.query(selector, _context[0]);
+            }
+          }
+          return jCache.objectsCollection[context][selector];
+        } else {
+          if(jCache.objectsCollection[selector] === undefined) {
+            jCache.objectsCollection[selector] = {};
+            if(jCache.objectsCollection[selector]['_object'] === undefined) {
+              jCache.objectsCollection[selector]['_object'] = jCache.query(selector);
+            }
+          }
+          return jCache.objectsCollection[selector]['_object'];
+        }
       }
-      var iks = [selector,context];
-      return jCache.set(selector, jCache.query(selector, context));
+      return selector
     },
     'clear'             : function(object) {
 
-    },
-    'set'               : function(key, value) {
-      return jCache.objectsCollection[key] = value;
     },
     'query'             : function(object, context, incontext) {
       var 
