@@ -1,5 +1,5 @@
-[jCache] - Fast and functional cache for jQuery object
-#DISCLAIMER#
+#jCache# - Fast and functional cache for jQuery object
+##DISCLAIMER##
 WARNING! jCache is still under development! Use it at your own risc!
 ##Examples##
 jQuery plugin
