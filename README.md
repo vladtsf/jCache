@@ -3,12 +3,12 @@
 WARNING! jCache is still under development! Use it at your own risc!
 ##Examples##
 ###jQuery plugin###
-`(function($, $c, undefined) {\n
-    $.fn.foo = function() {\n
-      $c('a').css('color', '#f00');\n
-    };\n
+`(function($, $c, undefined) {
+    $.fn.foo = function() {
+      $c('a').css('color', '#f00');
+    };
  });`
 ###Global Scope###
-`jQuery(document).ready(function() {\n
-  jCache('a').css('color', '#f00');\n
+`jQuery(document).ready(function() {
+  jCache('a').css('color', '#f00');
 });`
