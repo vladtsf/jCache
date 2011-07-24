@@ -1,83 +1,67 @@
 (function($, undefined) {  
-  var
-    jCache = function(selector, context) {
-      var 
-        $this = $(this),
-        se     = selector || false,
-        co     = context  || false;
-      if(selector) {
-        return jCache.get(se, co);
-      }
-      return this;
-    };
+  var 
+  jCache = function(selector, context) {
+    var 
+      se     = selector || false,
+      co     = context  || false;
+    if(selector) {
+      return jCache.get(se, co);
+    }
+    return jCache;
+  };
 
-
-  $.extend(jCache, {
-    'get'               : function(selector, context) {
-      if(typeof(selector) == 'string') {
-        if(context) {
-          if(context.length == 0) {
-            return $();
-          }
-          var _context = jCache.get(context);
-          if(jCache.objectsCollection[context][selector] === undefined) {
-              jCache.objectsCollection[context][selector] = jCache.query(selector, _context);
-          }
-          return jCache.objectsCollection[context][selector];
-        } else {
-          if(jCache.objectsCollection[selector] === undefined) {
-            jCache.objectsCollection[selector] = {};
-            if(selector instanceof jQuery) {
-              return selector;
-            }
-            if(jCache.objectsCollection[selector]['_object'] === undefined) {
-              jCache.objectsCollection[selector]['_object'] = jCache.query(selector);
-            }
-          }
-          return jCache.objectsCollection[selector]['_object'];
+  jCache['clear'] = function(selector, context) {
+    if(selector == undefined) {
+      jCache.objectsCollection = new Object();
+      return;
+    }
+    if(context) {
+      if(jCache.objectsCollection[context] !== undefined) {
+        if(jCache.objectsCollection[context][selector] !== undefined) {
+          jCache.objectsCollection[context][selector] = undefined;
         }
       }
+    } else {
+      jCache.objectsCollection[selector] = undefined;
+    }
+  };
+
+  jCache['get'] = function(selector, context) {
+    if(typeof(selector) == 'string') {
       if(context) {
-        return $(selector, context);
-      } else {
-        if(jCache.objectsCollection[selector] == undefined) {
-          jCache.objectsCollection[selector] = {};
+        if(context.length == 0) {
+          return $();
         }
-        return jCache.objectsCollection[selector]['_object'] = $(selector);
+        var _context = jCache.get(context);
+        if(jCache.objectsCollection[context][selector] === undefined) {
+          jCache.objectsCollection[context][selector] = $(selector, _context);
+        }
+        return jCache.objectsCollection[context][selector];
+      } else {
+        if(jCache.objectsCollection[selector] === undefined) {
+          jCache.objectsCollection[selector] = new Object();
+          if(selector instanceof jQuery) {
+            return selector;
+          }
+          if(jCache.objectsCollection[selector]['_object'] === undefined) {
+            jCache.objectsCollection[selector]['_object'] = $(selector);
+          }
+        }
+        return jCache.objectsCollection[selector]['_object'];
       }
-    },
-    
-    
-    
-    'clear'             : function(object) {
-
-    },
-    
-    
-    
-    'query'             : function(object, context, incontext) {
-      var 
-        c = context || document;
-      return $(object, c);
-    },
-    
-    
-    
-    'isObjectPassed'    : function(who) {
-      if(who.selector == '' & who.length == 0) {
-        return false;
+    }
+    if(context) {
+      return $(selector, context);
+    } else {
+      if(jCache.objectsCollection[selector] == undefined) {
+        jCache.objectsCollection[selector] = new Object();
       }
-      return true;
-    },
+      return jCache.objectsCollection[selector]['_object'] = $(selector);
+    }
+  };
     
-    
-    
-    'objectsCollection' : new Object(),
-    'QSA'               : 'querySelectorAll' in document
-
-  });
-
-
-  jCache.objectsCollection = {};
-  $.fn.jCache = jCache;
+  jCache['objectsCollection'] = new Object();
+  
+  window['jCache'] = jCache;
+  
 })(jQuery);
