@@ -9,7 +9,7 @@ WARNING! jCache is still under development! Use it at your own risc!
         $.fn.foo = function() {
           $c('a').css('color', '#f00');
         };
-     });
+     })(jQuery, jCache);
 
 
 ###Global Scope
