@@ -1,7 +1,8 @@
-(function($, $c,undefined) {
+(function($, undefined) {
   $(document).ready(function() {
     
-    module('jCache');
+    module('$.jCache');
+    var $c = new $.jCache();
     
     test('Text Selectors', function() {
       
@@ -26,5 +27,14 @@
 
     });
     
+    
+    test('Object Creation', function() {
+      
+      expect(2);
+      deepEqual($c('<div />'), $('<div />'), 'Object creation from html');
+      deepEqual($c('<a />', {'href':'http://github.com'}), $('<a />', {'href':'http://github.com'}), 'Object with arguments creation');
+
+    });
+    
   });
-})(jQuery, jCache);
+})(jQuery);
