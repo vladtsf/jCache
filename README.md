@@ -1,20 +1,10 @@
-#jCache - Fast and functional cache for jQuery objects#
-##DISCLAIMER##
-WARNING! jCache is still under development! Use it at your own risc!
+#jCache - Simple and functional cache for jQuery objects#
 ##Examples##
-###jQuery plugin
 
-
-    (function($, $c, undefined) {
-        $.fn.foo = function() {
-          $c('a').css('color', '#f00');
-        };
-     })(jQuery, jCache);
-
-
-###Global Scope
-
-    jQuery(document).ready(function() {
-      jCache('a').css('color', '#f00');
-    });
-
+	var $c = new $.jCache();
+	var
+	    $c1 = $c('.class1'),
+	    $c2 = $c('.class2');
+	$c
+	    .remove('.class1')
+	    .clear();

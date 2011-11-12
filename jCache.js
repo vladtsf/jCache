@@ -1,5 +1,5 @@
 /*
- *  jCache - Fast and functional cache for jQuery objects
+ *  jCache - Simple and functional cache for jQuery objects
  *  Copyright (C) 2011  Vladimir Tsvang
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
