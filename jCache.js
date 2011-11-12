@@ -64,7 +64,7 @@
 	 * Clear cache
 	 * 
 	 * @example
-	 *	$.clear();
+	 *	$c.clear();
 	 */
 	clear : function() {
 	    this.cache = new Object();
