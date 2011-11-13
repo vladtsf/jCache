@@ -22,68 +22,68 @@
      * @constructor
      */
     var jCache = function() {
-	if(this instanceof jCache) {
-	    this.cache = new Object();
-	    
-	    var 
-		proxy = $.proxy(this.get, this);
-	    
-	    proxy.remove = $.proxy(jCache.mixin.remove, this);
-	    proxy.clear = $.proxy(jCache.mixin.clear, this);
-	    
-	    return proxy;
-	}
-	return new jCache();
+		if(this instanceof jCache) {
+			this.cache = new Object();
+			
+			var 
+			proxy = $.proxy(this.get, this);
+			
+			proxy.remove = $.proxy(jCache.mixin.remove, this);
+			proxy.clear = $.proxy(jCache.mixin.clear, this);
+			
+			return proxy;
+		}
+		return new jCache();
     };
     
     /**
      * Converts arguments object to array
      */
     jCache.getArgs = function(args) {
-	return Array.prototype.slice.call(args);
+		return Array.prototype.slice.call(args);
     };
     
     jCache.mixin = {
-	/**
-	 * Removes element from cache
-	 * 
-	 * @example
-	 *	$c.remove('div');
-	 */
-	remove : function() {
-	    var args = jCache.getArgs(arguments);
-	    
-	    if(args in this.cache) {
-		delete this.cache[args];
-	    }
-	    
-	    return this;
-	},
-	
-	/**
-	 * Clear cache
-	 * 
-	 * @example
-	 *	$c.clear();
-	 */
-	clear : function() {
-	    this.cache = new Object();
-	    return this;
-	}
+		/**
+		 * Removes element from cache
+		 * 
+		 * @example
+		 *	$c.remove('div');
+		 */
+		remove : function() {
+			var args = jCache.getArgs(arguments);
+			
+			if(args in this.cache) {
+			delete this.cache[args];
+			}
+			
+			return this;
+		},
+		
+		/**
+		 * Clear cache
+		 * 
+		 * @example
+		 *	$c.clear();
+		 */
+		clear : function() {
+			this.cache = new Object();
+			return this;
+		}
     };
 	
     
     jCache.prototype = {
 	
-	get: function() {
-	    var args = jCache.getArgs(arguments);
-	    
-	    if(!(args in this.cache)) {
-			this.cache[args] = $.apply(w, args);
-	    }
-	    
-	    return this.cache[args];
-	}
+		get: function() {
+			var args = jCache.getArgs(arguments);
+			
+			if(!(args in this.cache)) {
+				this.cache[args] = $.apply(w, args);
+			}
+			
+			return this.cache[args];
+		}
 	
     };
     
