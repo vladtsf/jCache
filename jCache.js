@@ -53,7 +53,7 @@
 	remove : function() {
 	    var args = jCache.getArgs(arguments);
 	    
-	    if(this.cache[args]) {
+	    if(args in this.cache) {
 		delete this.cache[args];
 	    }
 	    
@@ -78,8 +78,8 @@
 	get: function() {
 	    var args = jCache.getArgs(arguments);
 	    
-	    if(!this.cache[args]) {
-		this.cache[args] = $.apply(w, args);
+	    if(!(args in this.cache)) {
+			this.cache[args] = $.apply(w, args);
 	    }
 	    
 	    return this.cache[args];
